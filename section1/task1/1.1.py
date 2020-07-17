@@ -77,7 +77,10 @@ e = "binance"
 start_time = "2017-04-01 00:00:00"
 end_time = "2020-04-01 00:00:00"
 candle_data = CryptoCompareAPI()
-print(candle_data.get_histohour_data(fsym, tsym, e, start_time, end_time))
+histohour_datatable = candle_data.get_histohour_data(fsym, tsym, e, start_time, end_time)
+print(histohour_datatable)
+# export to .csv file and remove the row index
+histohour_datatable.to_csv('1.1.csv', index = False)
 
 # optional
 limit = 10
