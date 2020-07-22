@@ -4,23 +4,19 @@ import datetime
 import numpy as np
 import pandas as pd
 import math
-limit = 10
-tsym = "USDT"
-# req = requests.get(
-#             'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USDT')
-# df = pd.DataFrame.from_dict(req.json(), orient = 'index')
-# df_data = df.loc["Data",0]
-# print(df_data)
-fsym = "BTC"
-tsym = "USDT"
-e = "binance"
-start_time = "2017-04-01 00:00:00"
-end_time = "2020-04-01 00:00:00"
-url = 'https://min-api.cryptocompare.com/data'
-start_time_unix = pd.Timestamp(start_time).value // 10**9
-end_time_unix = pd.Timestamp(end_time).value // 10**9
-# request from cryptocompare
-histohour_url_first = '/v2/histohour?fsym={}&tsym={}&e={}&limit=2000&toTs={}'.format(fsym, tsym, e, end_time_unix)
-print(url + histohour_url_first)
+import time
+from binance.client import Client
+from binance.enums import *
 
+api_key = 'DYpf4c2nFdjIL8xIe2D4KckfRDEJJ9WD0N6bOJZBEvCD5IjhHGo6d1BCwXAR2bBV'
+api_secret = 'jUhYqtfcJABTj3mXX3VbhwCCpdgXcLbcGyoGrnOYSQZMMiYIJhSUudivydubucx1'
+client = Client(api_key, api_secret)
 
+order = client.create_test_order(
+    symbol='BNBBTC',
+    side=SIDE_BUY,
+    type=ORDER_TYPE_LIMIT,
+    timeInForce=TIME_IN_FORCE_GTC,
+    quantity=100,
+    price='0.001')
+print(order)

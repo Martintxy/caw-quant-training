@@ -27,9 +27,9 @@ class CryptoCompareAPI():
         # request from cryptocompare
         histohour_url_first = '/v2/histohour?fsym={}&tsym={}&e={}&limit=2000&toTs={}'.format(fsym, tsym, e, end_time_unix)
         req = requests.get(self.url + histohour_url_first)
-        # convert the json type object into a dataframe
+        # convert into a dataframe
         df = pd.DataFrame(req.json())
-        # get the data table for one request
+        # get data for one request
         df_table = pd.DataFrame(df.loc["Data", "Data"])
         # get the timestamp for the subsequent request
         df_timestamploop = df.loc["TimeFrom", "Data"]
@@ -84,7 +84,7 @@ histohour_datatable = candle_data.get_histohour_data(
     fsym, tsym, e, start_time, end_time)
 print(histohour_datatable)
 # export to .csv file and remove the row index
-histohour_datatable.to_csv('1.1.csv', index=False)
+histohour_datatable.to_csv('section1/task1/1.1.csv', index=False)
 
 # optional
 limit = 10
