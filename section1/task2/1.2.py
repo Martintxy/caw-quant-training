@@ -7,7 +7,7 @@ import json
 from binance.enums import *
 
 # load api
-with open('my_trading_api.json') as f:
+with open('section1/task2/my_trading_api.json') as f:
     api = json.load(f)
     api_key = api[0]
     api_secret = api[1]
