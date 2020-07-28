@@ -3,8 +3,8 @@
 # Edit at https://www.gitignore.io/?templates=linux,macos,python,windows
 
 # binance api file
-my_trading_api.json
 api_key.json
+my_trading_api.json
 
 ### Linux ###
 *~
