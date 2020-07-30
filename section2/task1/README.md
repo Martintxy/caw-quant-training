@@ -25,7 +25,7 @@ section2
 │       BTC_USDT_1h
 └── log # folder to contain all log files
 │       logfile
-└── report # folder to containe reports. e.x. photo and optmization table
+└── report # folder to contain reports. e.x. photo and optmization table
 │       reportfile
 ├── README.md
 ├── requirements.txt
