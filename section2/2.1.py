@@ -1,13 +1,9 @@
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 import datetime  # For datetime objects
 import os.path  # To manage paths
 import sys  # To find out the script name (in argv[0])
 
 # Import the backtrader platform
 import backtrader as bt
-
 
 # Create a Stratey
 class TestStrategy(bt.Strategy):
@@ -121,7 +117,7 @@ if __name__ == '__main__':
     # Datas are in a subfolder of the samples. Need to find where the script is
     # because it could have been called from anywhere
     modpath = os.path.dirname(os.path.abspath(sys.argv[0]))
-    datapath = os.path.join(modpath, 'C:/Users/24572/Documents/GitHub/caw-quant-training/backtrader/datas/nvda-1999-2014.txt')
+    datapath = os.path.join(modpath, 'data/nvda-1999-2014.txt')
 
     # Create a Data Feed
     data = bt.feeds.YahooFinanceCSVData(
