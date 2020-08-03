@@ -27,7 +27,7 @@ import datetime
 # all third-party libraries in the middle
 import backtrader as bt
 import pandas as pd
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 # all your own modules in the end
 from mycode import myfunc
