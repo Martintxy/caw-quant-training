@@ -1,31 +1,18 @@
 # test any new functions or libraries
-import requests
 import datetime
 import numpy as np
 import pandas as pd
 import math
 import json
 import unittest
-from etherscan.tokens import Tokens
-from crypto_news_api import CryptoControlAPI
 
-import requests
-import datetime
-import numpy as np
-import pandas as pd
-import json
-from crypto_news_api import CryptoControlAPI
-# optional 2
-# Connect to the CryptoControl API
-with open('section1/task3/api_key.json', mode='r') as key_file:
-    key2 = json.loads(key_file.read())['key2']
+# environment params/ global variables
+datadir = 'section2/data'  # data path
+logdir = 'section2/log'  # log path
+reportdir = 'section2/report'  # report path
+datafile = 'BTC_USDT_1h.csv'  # data file
+from_datetime = '2020-01-01 00:00:00'  # start time
+to_datetime = '2020-04-01 00:00:00'  # end time
 
-api = CryptoControlAPI(key2)
-
-# Connect to a self-hosted proxy server (to improve performance) that points to cryptocontrol.io
-proxyApi = CryptoControlAPI(key2, "http://cryptocontrol_proxy/api/v1/public")
-
-
-# get news articles grouped by category
-print(pd.DataFrame(api.getTopNewsByCategory()))
-
+print(from_datetime[0:10])
+print(datafile[0:-4])
