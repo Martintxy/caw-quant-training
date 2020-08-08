@@ -14,5 +14,7 @@ datafile = 'BTC_USDT_1h.csv'  # data file
 from_datetime = '2020-01-01 00:00:00'  # start time
 to_datetime = '2020-04-01 00:00:00'  # end time
 
-print(from_datetime[0:10])
-print(datafile[0:-4])
+params = (
+    ('pfast', 10),
+    ('pslow', 20),
+)
