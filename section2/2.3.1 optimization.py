@@ -20,6 +20,7 @@ class SMACross(bt.Strategy):
     params = (
         ('pfast', 10),
         ('pslow', 20),
+        ('printlog', True)
     )
     
     def __init__(self):
@@ -37,7 +38,18 @@ class SMACross(bt.Strategy):
         # sell if in the mkt and fast is below slow
         elif self.crossover < 0:
             self.order = self.sell()
-    
+
+    def log(self, txt, dt=None, doprint=False):
+        ''' Logging function fot this strategy'''
+        if self.params.printlog or doprint:
+            dt = dt or self.datas[0].datetime.date(0)
+            print('%s, %s' % (dt.isoformat(), txt))
+
+    def stop(self):
+        self.log('(fastma period %2d, slowma period %2d) Ending Value %.2f' %
+                 (self.params.pfast, self.params.pslow, self.broker.getvalue()))
+
+
 # initiate cerebro instance
 cerebro = bt.Cerebro()
 
@@ -50,31 +62,13 @@ data = data.loc[
 datafeed = bt.feeds.PandasData(dataname=data)
 cerebro.adddata(datafeed)
 
+# feed optimized strategy
+cerebro.optstrategy(SMACross, pfast = range(5,25,5), pslow = range(20,100,20))
+
 # additional backtest setting
 cerebro.addsizer(bt.sizers.PercentSizer, percents=99)
 cerebro.broker.set_cash(10000)
 cerebro.broker.setcommission(commission=0.001)
 
-if __name__ == "__main__":
-    # feed strategy
-    cerebro.addstrategy(SMACross)
-
-    # add logger
-    logfile = '_'.join([datafile[0:-4], str(cerebro.strats[0][0][0])[-10:-2], str(cerebro.strats[0][0][0].params.__dict__['pfast']),
-                        str(cerebro.strats[0][0][0].params.__dict__['pslow']), from_datetime[:10], to_datetime[:10]])+'.csv'
-    cerebro.addwriter(
-        bt.WriterFile,
-        out=os.path.join(logdir, logfile),
-        csv=True)
-
-    # run
-    cerebro.run()
-
-    # save report
-    figfile = '_'.join([datafile[0:-4], str(cerebro.strats[0][0][0])[-10:-2], str(cerebro.strats[0][0][0].params.__dict__['pfast']),
-                        str(cerebro.strats[0][0][0].params.__dict__['pslow']), from_datetime[:10], to_datetime[:10]])+'.png'
-    plt.rcParams['figure.figsize'] = [13.8, 10]
-    fig = cerebro.plot(style='candlestick', barup='green', bardown='red')
-    fig[0][0].savefig(
-        os.path.join(reportdir, figfile),
-        dpi=480)
+# run
+cerebro.run(maxcpus = 1)

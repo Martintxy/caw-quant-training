@@ -184,3 +184,8 @@ $RECYCLE.BIN/
 
 .vscode
 other
+section2/2.3_sample_optimization.py
+btreport/
+sample code/SMACross.py
+sample code/SMACross_opt.py
+sample code/utils.py

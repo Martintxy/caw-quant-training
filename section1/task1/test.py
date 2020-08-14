@@ -1,20 +1,26 @@
-# test any new functions or libraries
 import datetime
-import numpy as np
-import pandas as pd
-import math
-import json
-import unittest
 
-# environment params/ global variables
-datadir = 'section2/data'  # data path
-logdir = 'section2/log'  # log path
-reportdir = 'section2/report'  # report path
-datafile = 'BTC_USDT_1h.csv'  # data file
-from_datetime = '2020-01-01 00:00:00'  # start time
-to_datetime = '2020-04-01 00:00:00'  # end time
+import backtrader as bt
+import backtrader.analyzers as btanalyzers
+import backtrader.feeds as btfeeds
+import backtrader.strategies as btstrats
 
-params = (
-    ('pfast', 10),
-    ('pslow', 20),
-)
+cerebro = bt.Cerebro()
+
+# data
+dataname = 'section2/data/2005-2006-day-001.txt'
+data = btfeeds.BacktraderCSVData(dataname=dataname)
+
+cerebro.adddata(data)
+
+# strategy
+cerebro.addstrategy(btstrats.SMA_CrossOver)
+
+# Analyzer
+#cerebro.addanalyzer(btanalyzers.SharpeRatio, _name='mysharpe')
+
+thestrats = cerebro.run()
+thestrat = thestrats[0]
+
+#print('Sharpe Ratio:', thestrat.analyzers.mysharpe.get_analysis()['sharperatio'])
+print(thestrat.analyzers.)
